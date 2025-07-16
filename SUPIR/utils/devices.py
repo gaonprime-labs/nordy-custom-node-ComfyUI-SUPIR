@@ -49,19 +49,19 @@ def torch_gc():
         mac_specific.torch_mps_gc()
 
 
-def enable_tf32():
-    if torch.cuda.is_available():
+# def enable_tf32():
+#     if torch.cuda.is_available():
 
-        # enabling benchmark option seems to enable a range of cards to do fp16 when they otherwise can't
-        # see https://github.com/AUTOMATIC1111/stable-diffusion-webui/pull/4407
-        if any(torch.cuda.get_device_capability(devid) == (7, 5) for devid in range(0, torch.cuda.device_count())):
-            torch.backends.cudnn.benchmark = True
+#         # enabling benchmark option seems to enable a range of cards to do fp16 when they otherwise can't
+#         # see https://github.com/AUTOMATIC1111/stable-diffusion-webui/pull/4407
+#         if any(torch.cuda.get_device_capability(devid) == (7, 5) for devid in range(0, torch.cuda.device_count())):
+#             torch.backends.cudnn.benchmark = True
 
-        torch.backends.cuda.matmul.allow_tf32 = True
-        torch.backends.cudnn.allow_tf32 = True
+#         torch.backends.cuda.matmul.allow_tf32 = True
+#         torch.backends.cudnn.allow_tf32 = True
 
 
-enable_tf32()
+# enable_tf32()
 #errors.run(enable_tf32, "Enabling TF32")
 
 cpu = torch.device("cpu")
